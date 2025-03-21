@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os/exec"
+	"path/filepath"
 	"strings"
 	"time"
 
@@ -77,7 +78,7 @@ func main() {
 				time.Sleep(5 * time.Minute)
 				continue
 			}
-			if err := restartWireGuard(); err != nil {
+			if err := restartWireGuard(config.WireGuardConfigPath); err != nil {
 				log.Printf("Error restarting WireGuard: %v", err)
 				time.Sleep(5 * time.Minute)
 				continue
@@ -152,15 +153,18 @@ func updateWireGuardConfig(configPath string, newIP string) error {
 	return ioutil.WriteFile(configPath, []byte(strings.Join(newLines, "\n")), 0644)
 }
 
-func restartWireGuard() error {
+func restartWireGuard(configPath string) error {
+	// Extract interface name from config path (e.g., /etc/wireguard/erbo.conf -> erbo)
+	configName := strings.TrimSuffix(filepath.Base(configPath), ".conf")
+
 	// Stop WireGuard
-	stopCmd := exec.Command("sudo", "wg-quick", "down", "wg0")
+	stopCmd := exec.Command("sudo", "wg-quick", "down", configName)
 	if err := stopCmd.Run(); err != nil {
 		return fmt.Errorf("error stopping WireGuard: %v", err)
 	}
 
 	// Start WireGuard
-	startCmd := exec.Command("sudo", "wg-quick", "up", "wg0")
+	startCmd := exec.Command("sudo", "wg-quick", "up", configName)
 	if err := startCmd.Run(); err != nil {
 		return fmt.Errorf("error starting WireGuard: %v", err)
 	}
