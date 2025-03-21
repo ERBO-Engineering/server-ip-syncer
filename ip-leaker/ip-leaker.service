@@ -1,0 +1,14 @@
+[Unit]
+Description=IP Address Tracker Service
+After=network.target
+
+[Service]
+Type=simple
+User=%i
+WorkingDirectory=/home/%i/ip-leaker
+ExecStart=/usr/local/bin/ip-leaker
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target 

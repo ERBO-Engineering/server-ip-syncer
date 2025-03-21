@@ -1,0 +1,22 @@
+# Build directory
+build/
+
+# Firebase credentials
+key.json
+
+# Binary files
+ip-leaker
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Go specific
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out 
