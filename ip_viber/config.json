@@ -1,0 +1,5 @@
+{
+    "firebase_config_path": "firestore.json",
+    "wireguard_config_path": "/etc/wireguard/wg0.conf",
+    "firebase_document_path": "ip_addresses/current_ip"
+} 

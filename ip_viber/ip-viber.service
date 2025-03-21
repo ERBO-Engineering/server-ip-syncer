@@ -1,0 +1,14 @@
+[Unit]
+Description=IP Viber - WireGuard IP Monitor
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/ip-viber
+ExecStart=/opt/ip-viber/IP_viber
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target 
