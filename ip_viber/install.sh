@@ -9,12 +9,12 @@ echo "Installing IP Viber..."
 sudo mkdir -p /opt/ip-viber
 
 # Copy application files
-sudo cp IP_viber /opt/ip-viber/
+sudo cp ip_viber /opt/ip-viber/
 sudo cp config.json /opt/ip-viber/
 sudo cp firestore.json /opt/ip-viber/
 
 # Set permissions
-sudo chmod 755 /opt/ip-viber/IP_viber
+sudo chmod 755 /opt/ip-viber/ip_viber
 sudo chmod 644 /opt/ip-viber/config.json
 sudo chmod 600 /opt/ip-viber/firestore.json
 
